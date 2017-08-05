@@ -6,30 +6,33 @@
  * \date 2017-06-11
  */
 
+#include <cassert>
 #include <cinttypes>
 #include <iostream>
+#include <string>
 
 int main(void) {
   size_t n;
+  int64_t a = 0;
+  int64_t max_odd_sum = (int64_t)(INT32_MIN) + 1;
+  int64_t max_even_sum = (int64_t)(INT32_MIN);
   std::cin >> n;
-  int64_t max_even = -1000000000;
-  int64_t max_odd = -10000000001;
-  while (n > 0) {
-    int64_t a;
+
+  for (size_t i = 0; i < n; i++) {
     std::cin >> a;
 
-    auto b = max_even + a;
-    auto c = max_odd + a;
-
-    if (a & 1) { // odd
-      max_odd = std::max(std::max(b, a), max_odd);
-      max_even = std::max(c, max_even);
+    auto prev_max_even_sum = max_even_sum;
+    auto prev_max_odd_sum = max_odd_sum;
+    if (a % 2 == 0) {
+      max_even_sum =
+          std::max(std::max(a, prev_max_even_sum + a), prev_max_even_sum);
+      max_odd_sum = std::max(prev_max_odd_sum + a, prev_max_odd_sum);
     } else {
-      max_odd = std::max(c, max_odd);
-      max_even = std::max(std::max(b, a), max_even);
+      max_odd_sum =
+          std::max(std::max(prev_max_even_sum + a, prev_max_odd_sum), a);
+      max_even_sum = std::max(prev_max_even_sum, prev_max_odd_sum + a);
     }
-    n--;
   }
-  std::cout << max_odd << std::endl;
+  std::cout << max_odd_sum << std::endl;
   return 0;
 }
