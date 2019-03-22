@@ -9,6 +9,7 @@
 #include <cassert>
 #include <cinttypes>
 #include <iostream>
+#include <algorithm>
 #include <string>
 
 int main(void) {

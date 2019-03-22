@@ -8,6 +8,7 @@
 
 #include <cassert>
 #include <cinttypes>
+#include <algorithm>
 #include <iostream>
 #include <string>
 
