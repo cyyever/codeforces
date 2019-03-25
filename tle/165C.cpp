@@ -16,40 +16,34 @@ int main() {
   size_t k;
   std::cin >> k;
 
-  std::vector<uint64_t> preffix_cnts(k+1,0);
   std::vector<uint64_t> substr_cnts(k+1,0);
 
   uint64_t substr_cnt=0;
-    while(true) {
-      char c;
-      std::cin>> c;
+  while(true) {
+    char c;
+    std::cin>> c;
 
-      if(std::cin.eof()) {
-        break;
-      }
-
-    for(size_t i=0;i<=k;i++) {
-      if(c=='0') {
-        substr_cnts[i]=preffix_cnts[i];
-        if(i==0) {
-        substr_cnts[i]++;
-        }
-      } else {
-        if(i==0) {
-          substr_cnts[i]=0;
-        } else {
-          substr_cnts[i]=preffix_cnts[i-1];
-          if(i==1) {
-            substr_cnts[i]++;
-          }
-        }
-      }
+    if(std::cin.eof()) {
+      break;
     }
-    substr_cnt+=substr_cnts[k];
-    std::swap(preffix_cnts,substr_cnts);
+    if(c=='0') {
+      substr_cnts[0]++;
+    } else {
+      substr_cnts[0]++;
+      for(size_t i=k;i>=1;i--) {
+        substr_cnts[i]=substr_cnts[i-1];
+      }
+      /*
+      if(k>0) {
+      substr_cnts[1]++;
+      }
+      */
+      substr_cnts[0]=0;
+    }
+  substr_cnt+=substr_cnts[k];
   }
 
-  std::cout<<substr_cnt;
-  return 0;
+std::cout<<substr_cnt;
+return 0;
 
 }
