@@ -14,33 +14,39 @@
 
 int main(void) {
    std::cout.sync_with_stdio(false);
-  size_t n,m;
-  std::cin >> n>>m;
-  std::vector<uint32_t> flags(n,0);
-  size_t threshhold=0;
+  size_t n;
+  std::cin >> n;
 
+  std::vector<uint64_t> divisors;
+  divisors.reserve(n);
 
-  size_t cnt=0;
-  for (size_t j=0;j<m;j++) {
-    size_t c;
-    std::cin >> c;
-    c--;
-    flags[c]++;
-    if (flags[c]==threshhold+1) {
-      cnt++;
-      if(cnt==n) {
-        std::cout<<'1';
-        threshhold++;
-        cnt=0;
-        for(auto &flag:flags) {
-          if (flag>threshhold) {
-            cnt++;
-          }
-        }
-        continue;
+  for(size_t i=0;i<n;i++) {
+    uint64_t a;
+    std::cin>>a;
+    divisors.push_back(a);
+  }
+
+  std::sort(divisors.begin(),divisors.end());
+
+  uint64_t y;
+  y=divisors.back();
+  divisors.pop_back();
+
+  uint64_t x=0;
+  uint64_t last_y_divisor=y;
+  for(auto it=divisors.rbegin();it!=divisors.rend();it++) {
+    if(y%(*it)==0) {
+      if(last_y_divisor==*it) {
+        x=*it;
+        break;
       }
-    } 
-    std::cout<<'0';
+      last_y_divisor=*it;
+    } else {
+      x=*it;
+      break;
+    }
   }
+
+  std::cout<<x<<' '<<y;
   return 0;
-  }
+}
