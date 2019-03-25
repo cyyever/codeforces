@@ -11,43 +11,45 @@
 #include <algorithm>
 #include <vector>
 
-int main(void) {
+int main() {
+  std::ios::sync_with_stdio(false);
   size_t k;
   std::cin >> k;
 
-  size_t one_cnt=0;
+  std::vector<uint64_t> preffix_cnts(k+1,0);
+  std::vector<uint64_t> substr_cnts(k+1,0);
+
   uint64_t substr_cnt=0;
-  std::vector<uint64_t> zero_substrings;
-  zero_substrings.reserve(k);
-  zero_substrings.push_back(0);
+    while(true) {
+      char c;
+      std::cin>> c;
 
-  while(true) {
-    char c;
-    std::cin>> c;
-    if(std::cin.eof()) {
-      c='1';
-    }
+      if(std::cin.eof()) {
+        break;
+      }
 
-    if(c=='0') {
-      zero_substrings.back()++;
-    } else {
-      if(one_cnt==k) {
-        if(k==0) {
-        substr_cnt+=(zero_substrings[0]+1)*zero_substrings[0]/2;
-        } else {
-        substr_cnt+=(zero_substrings[0]+1)*(zero_substrings.back()+1);
+    for(size_t i=0;i<=k;i++) {
+      if(c=='0') {
+        substr_cnts[i]=preffix_cnts[i];
+        if(i==0) {
+        substr_cnts[i]++;
         }
-        zero_substrings.erase(zero_substrings.begin());
-        one_cnt--;
-      } 
-      one_cnt++;
-      zero_substrings.push_back(0);
+      } else {
+        if(i==0) {
+          substr_cnts[i]=0;
+        } else {
+          substr_cnts[i]=preffix_cnts[i-1];
+          if(i==1) {
+            substr_cnts[i]++;
+          }
+        }
+      }
     }
-    if(std::cin.eof()) {
-      break;
-    }
+    substr_cnt+=substr_cnts[k];
+    std::swap(preffix_cnts,substr_cnts);
   }
-    std::cout<<substr_cnt;
 
+  std::cout<<substr_cnt;
   return 0;
+
 }
