@@ -2,7 +2,6 @@
  * \file 1141.cpp
  *
  * \author cyy
- * \date 2017-06-12
  */
 
 #include <iostream>

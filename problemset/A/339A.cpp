@@ -3,7 +3,6 @@
  *
  * \brief http://codeforces.com/problemset/problem/339/A
  * \author cyy
- * \date 2017-06-11
  */
 
 #include <algorithm>

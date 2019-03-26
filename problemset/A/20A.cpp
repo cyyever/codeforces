@@ -3,7 +3,6 @@
  *
  * \brief http://codeforces.com/problemset/problem/20/A
  * \author cyy
- * \date 2017-06-12
  */
 
 #include <iostream>
