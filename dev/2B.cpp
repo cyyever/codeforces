@@ -10,67 +10,87 @@
 #include <algorithm>
 #include <utility>
 #include <vector>
+#include <unordered_map>
+#include <map>
 
-int64_t get_zero_cnt(const std::pair<int64_t,int64_t> &a) {
-  if(a.first==-1) {
-    return 1;
-  }
-  return std::min(a.first,a.second);
-}
 
-std::pair<int64_t,int64_t> add_pair(const std::pair<int64_t,int64_t> &a,const std::pair<int64_t,int64_t> &b)  {
-  if(a.first==-1) {
-    return a;
-  }
-    if( b.first==-1) {
-      return b;
+class number final {
+  public:
+    number(uint64_t a):two_cnt{0},five_cnt{0} {
+      if(a==0) {
+        two_cnt=1;
+        five_cnt=1;
+        is_zero=true;
+        return;
+      }
+
+      uint64_t factor=2;
+
+      while(a%factor==0) {
+        two_cnt++;
+        factor*=2;
+      }
+      factor=5;
+      while(a%factor==0) {
+        five_cnt++;
+        factor*=5;
+      }
     }
-  return {a.first+b.first,a.second+b.second};
-}
+
+    number(const number&)=default;
+    uint64_t get_zero_count() const {
+      return std::min(two_cnt,five_cnt);
+    }
+    void multiply_number( const number &rhs) {
+      if (is_zero) {
+        return;
+      }
+      if(rhs.is_zero) {
+        two_cnt=rhs.two_cnt;
+        five_cnt=rhs.five_cnt;
+        is_zero=true;
+        return;
+      }
+      two_cnt+=rhs.two_cnt;
+      five_cnt+=rhs.five_cnt;
+    }
+
+    bool  compare_zero_count(const number &rhs) const {
+      return get_zero_count()<rhs.get_zero_count();
+
+    }
+    bool  operator<(const number &rhs) const {
+      if(is_zero && rhs.is_zero) {
+        return true;
+      }
+      return two_cnt <=rhs.two_cnt && five_cnt<=rhs.five_cnt && !rhs.is_zero;
+    }
+  public:
+    bool is_zero{};
+  private:
+    uint64_t two_cnt{};
+    uint64_t five_cnt{};
+};
+
 
 int main(void) {
   std::ios::sync_with_stdio(false);
   size_t n;
   std::cin >> n;
 
-  std::vector<std::vector<std::pair<int64_t,int64_t>>>  matrix;
+  std::vector<std::vector<number>>  matrix;
 
-  std::pair<size_t,size_t> zero_index;
-    bool has_zero=false;
   for(size_t i=0;i<n;i++) {
     matrix.emplace_back();
     for(size_t j=0;j<n;j++) {
-      int64_t a;
+      uint64_t a;
       std::cin>>a;
-
-      if(a!=0) {
-        int64_t two_cnt=0;
-        int64_t factor=2;
-
-        while(a%factor==0) {
-          two_cnt++;
-          factor*=2;
-        }
-        factor=5;
-        int64_t five_cnt=0;
-
-        while(a%factor==0) {
-          five_cnt++;
-          factor*=5;
-        }
-        matrix[i].emplace_back(two_cnt,five_cnt);
-      } else {
-        if(!has_zero) {
-          has_zero=true;
-          zero_index.first=j;
-          zero_index.second=i;
-        }
-        matrix[i].emplace_back(-1,-1);
-      }
+      matrix[i].emplace_back(a);
     }
   }
 
-  std::vector<std::vector<std::string>> route(n,std::vector<std::string>(n));
+  std::map<std::pair<size_t,size_t>, std::vector<std::pair<std::string,number>>> routes;
+  routes[{0,0}].emplace_back("",matrix[0][0]);
   for (size_t k=1;k<2*n-1;k++) {
     size_t i=0;
     if(k+1>=n) {
@@ -78,30 +98,46 @@ int main(void) {
     }
     i=std::min(i,n-1);
     size_t j=k-i;
+    auto tmp_routes=std::move(routes);
     while(true) {
-      int64_t zero_cnt=INT64_MAX;
-      std::string new_route;
-       std::pair<int64_t,int64_t> sum;
+      std::vector<std::pair<std::string,number>> my_routes;
       if(i>0) {
-        auto tmp=add_pair(matrix[i-1][j],matrix[i][j]);
-        int64_t new_zero_cnt=get_zero_cnt(tmp);
-        if(new_zero_cnt<zero_cnt) {
-          new_route=route[i-1][j]+'D';
-          zero_cnt=new_zero_cnt;
-          sum=std::move(tmp);
+        for (auto [old_route,old_num]:tmp_routes[{i-1,j}]) {
+          old_route+='D';
+            old_num.multiply_number(matrix[i][j]);
+
+            if(!std::any_of(my_routes.begin(),my_routes.end(),[&old_num] (const auto &r) {
+                 return  r.second<old_num;
+                  })) {
+
+
+             my_routes.erase(  std::remove_if(my_routes.begin(),my_routes.end(),[&old_num] (const auto &r) {
+                return old_num<r.second;
+              }),my_routes.end());
+              my_routes.emplace_back(old_route,old_num);
+            }
         }
       }
+        
+
       if(j>0) {
-        auto tmp=add_pair(matrix[i][j-1],matrix[i][j]);
-        int64_t new_zero_cnt=get_zero_cnt(tmp);
-        if(new_zero_cnt<zero_cnt || (new_zero_cnt==zero_cnt && tmp.first+tmp.second<sum.first+sum.second)) {
-          new_route=route[i][j-1]+'R';
-          zero_cnt=new_zero_cnt;
-          sum=std::move(tmp);
+        for (auto [old_route,old_num]:tmp_routes[{i,j-1}]) {
+          old_route+='R';
+            old_num.multiply_number(matrix[i][j]);
+
+            if(!std::any_of(my_routes.begin(),my_routes.end(),[&old_num] (const auto &r) {
+                 return  r.second<old_num;
+                  })) {
+
+
+       my_routes.erase(          std::remove_if(my_routes.begin(),my_routes.end(),[&old_num] (const auto &r) {
+                return old_num<r.second;
+              }),my_routes.end());
+              my_routes.emplace_back(old_route,old_num);
+            }
         }
       }
-      matrix[i][j]=std::move(sum);
-      route[i][j]=std::move(new_route);
+      routes[{i,j}]=my_routes;
       i++;
       if(i==n) {
         break;
@@ -113,24 +149,14 @@ int main(void) {
     }
   }
 
-  auto cnt=get_zero_cnt(matrix[n-1][n-1]);
-  if (cnt>1 && has_zero) {
-    std::cout<<1<<std::endl;
-    for(size_t i=0;i<zero_index.first;i++) {
-      std::cout<<'R';
-    }
-    for(size_t j=0;j<zero_index.second;j++) {
-      std::cout<<'D';
-    }
-    for(size_t i=zero_index.first;i+1<n;i++) {
-      std::cout<<'R';
-    }
-    for(size_t i=zero_index.second;i+1<n;i++) {
-      std::cout<<'D';
-    }
-    return 0;
-  }
-  std::cout<<cnt<<std::endl;
-  std::cout<<route[n-1][n-1];
+  auto it=std::min_element(routes[{n-1,n-1}].begin(),routes[{n-1,n-1}].end(),
+      [](const auto &a,const auto &b) {
+
+ return     a.second.compare_zero_count(b.second);
+
+      });
+
+  std::cout<<it->second.get_zero_count()<<std::endl;
+  std::cout<<it->first;
   return 0;
 }
