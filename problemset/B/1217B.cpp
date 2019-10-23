@@ -1,5 +1,5 @@
 /*!
- * \file 1712B.cpp
+ * \file 1217B.cpp
  *
  * \brief http://codeforces.com/problemset/problem/1712/B
  * \author cyy

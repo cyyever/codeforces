@@ -1,5 +1,5 @@
 /*!
- * \file 792C.cpp
+ * \file 165C.cpp
  *
  * \brief http://codeforces.com/problemset/problem/792/C
  * \author cyy

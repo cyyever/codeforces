@@ -1,5 +1,5 @@
 /*!
- * \file 118A.cpp
+ * \file 1136B.cpp
  *
  * \brief http://codeforces.com/problemset/problem/118/A
  * \author cyy
