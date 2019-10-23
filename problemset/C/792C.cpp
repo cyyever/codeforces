@@ -6,10 +6,8 @@
  * \date 2017-06-11
  */
 
-#include <cassert>
-#include <cinttypes>
-#include <iostream>
 #include <algorithm>
+#include <iostream>
 #include <string>
 
 int main(void) {
