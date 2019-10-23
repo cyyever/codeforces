@@ -1,7 +1,7 @@
 /*!
  * \file 165C.cpp
  *
- * \brief http://codeforces.com/problemset/problem/792/C
+ * \brief http://codeforces.com/problemset/problem/165/C
  * \author cyy
  * \date 2017-06-11
  */

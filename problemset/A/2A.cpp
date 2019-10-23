@@ -1,7 +1,7 @@
 /*!
  * \file 2A.cpp
  *
- * \brief http://codeforces.com/problemset/problem/118/A
+ * \brief http://codeforces.com/problemset/problem/2/A
  * \author cyy
  */
 
