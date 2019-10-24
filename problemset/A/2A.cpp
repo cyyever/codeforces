@@ -13,7 +13,6 @@
 #include <unordered_map>
 
 int main(void) {
-  std::ios::sync_with_stdio(false);
   size_t n;
   std::cin >> n;
 

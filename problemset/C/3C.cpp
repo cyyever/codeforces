@@ -68,7 +68,6 @@ bool has_valid_intersection(int weight) {
 }
 
 int main(void) {
-  std::ios::sync_with_stdio(false);
 
 
   for (size_t i=0;i<3;i++) {

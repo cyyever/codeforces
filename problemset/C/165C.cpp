@@ -12,7 +12,6 @@
 #include <vector>
 
 int main() {
-  std::ios::sync_with_stdio(false);
   size_t k;
   std::cin >> k;
 

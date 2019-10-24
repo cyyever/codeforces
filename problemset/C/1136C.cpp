@@ -12,7 +12,6 @@
 #include <map>
 
 int main(void) {
-  std::ios::sync_with_stdio(false);
   size_t n,m;
   std::cin >> n>>m;
 

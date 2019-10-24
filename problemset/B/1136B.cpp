@@ -11,7 +11,6 @@
 #include <vector>
 
 int main(void) {
-  std::ios::sync_with_stdio(false);
   uint64_t n,k;
   std::cin >> n>>k;
 
