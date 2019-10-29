@@ -50,12 +50,14 @@ int main() {
         }
       }
       if (!is_digit) {
-        for (auto c : odd_chars) {
-          std::cout << c;
+        while (i < odd_chars.size()) {
+          std::cout << odd_chars[i];
+          i++;
         }
         odd_chars.clear();
-        for (auto c : even_chars) {
-          std::cout << c;
+        while (j < even_chars.size()) {
+          std::cout << even_chars[j];
+          j++;
         }
         even_chars.clear();
         break;
