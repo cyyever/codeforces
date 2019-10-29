@@ -14,6 +14,7 @@
 int main() {
   size_t t;
   std::cin >> t;
+  getchar();
 
   std::vector<char> odd_chars;
   std::vector<char> even_chars;
@@ -22,8 +23,8 @@ int main() {
     size_t i = 0;
     size_t j = 0;
     while (true) {
-      int a=getchar();
-      bool is_digit = (a!=EOF&& a >= '0' && a <= '9');
+      int a = getchar();
+      bool is_digit = (a != EOF && a >= '0' && a <= '9');
       if (is_digit) {
         if ((a - '0') % 2 == 0) {
           even_chars.push_back(a);
