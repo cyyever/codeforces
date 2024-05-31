@@ -6,41 +6,39 @@
  * \date 2017-06-12
  */
 
-#include <algorithm>
-#include <cinttypes>
-#include <functional>
+#include <cstdint>
 #include <iostream>
-#include <vector>
 
-int main(void) {
-  uint64_t n,k;
+int main() {
+  uint64_t n;
+  uint64_t k;
 
   std::cin >> n >> k;
 
-  if(k==1) {
-    std::cout<< n<<std::endl;
+  if (k == 1) {
+    std::cout << n << '\n';
     return 0;
   }
 
-  uint64_t i;
-  if(k%2==0) {
-    i=k/2*(k+1);
+  uint64_t i = 0;
+  if (k % 2 == 0) {
+    i = k / 2 * (k + 1);
   } else {
-    i=(k+1)/2*k;
+    i = (k + 1) / 2 * k;
   }
 
-  for(;i<=n;i++) {
-    if(n%i==0) {
-      auto gcd=n/i;
-      for(uint64_t a=gcd,j=1;j<=k-1;j++,a+=gcd) {
-	std::cout<<a<<' ';
-	n-=a;
+  for (; i <= n; i++) {
+    if (n % i == 0) {
+      auto gcd = n / i;
+      for (uint64_t a = gcd, j = 1; j <= k - 1; j++, a += gcd) {
+        std::cout << a << ' ';
+        n -= a;
       }
-      std::cout<<n<<std::endl;
+      std::cout << n << '\n';
       return 0;
     }
   }
 
-  std::cout<< -1<<std::endl;
+  std::cout << -1 << '\n';
   return 0;
 }
