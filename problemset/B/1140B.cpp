@@ -10,7 +10,7 @@
 #include <cinttypes>
 #include <iostream>
 
-int main(void) {
+int main() {
   std::cout.sync_with_stdio(false);
   size_t t;
   std::cin >> t;
@@ -23,7 +23,7 @@ int main(void) {
     bool count_start_less_symbol = true;
     bool count_end_greater_symbol = false;
     for (size_t j = 0; j < n; j++) {
-      char c;
+      char c = 0;
       std::cin >> c;
       if (c == '<') {
         if (count_start_less_symbol) {

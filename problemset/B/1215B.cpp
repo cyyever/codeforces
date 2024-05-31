@@ -9,7 +9,7 @@
 #include <cinttypes>
 #include <iostream>
 
-int main(void) {
+int main() {
   size_t n;
   std::cin >> n;
   uint64_t positive_cnt = 0;

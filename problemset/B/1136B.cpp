@@ -5,15 +5,15 @@
  * \author cyy
  */
 
+#include <algorithm>
 #include <cstring>
 #include <iostream>
-#include <algorithm>
 #include <vector>
 
-int main(void) {
-  uint64_t n,k;
-  std::cin >> n>>k;
+int main() {
+  uint64_t n, k;
+  std::cin >> n >> k;
 
-  std::cout<<3*n+std::min(k-1,n-k);
+  std::cout << 3 * n + std::min(k - 1, n - k);
   return 0;
 }

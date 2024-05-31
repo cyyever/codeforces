@@ -8,7 +8,7 @@
 #include <cinttypes>
 #include <iostream>
 
-int main(void) {
+int main() {
   uint64_t n;
   std::cin >> n;
 

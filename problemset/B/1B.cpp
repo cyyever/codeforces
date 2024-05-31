@@ -11,7 +11,7 @@
 #include <iostream>
 #include <string>
 
-int main(void) {
+int main() {
   size_t n;
   std::cin >> n;
   while (n > 0) {

@@ -7,12 +7,12 @@
 
 #include <iostream>
 
-int main(void) {
+int main() {
   size_t n;
   size_t cnt = 0;
 
   std::cin >> n;
-  unsigned char c;
+  unsigned char c = 0;
   for (size_t i = 0; i < n; i++) {
 
     std::cin >> c;

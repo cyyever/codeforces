@@ -7,7 +7,7 @@
 #include <iostream>
 #include <map>
 
-int main(void) {
+int main() {
   size_t q;
 
   std::cin >> q;
@@ -24,7 +24,7 @@ int main(void) {
       }
       elements[s]++;
     }
-    bool has_2048 = false;
+    bool const has_2048 = false;
     for (auto [s, cnt] : elements) {
       if (s == 2048 && cnt) {
         has_2048 = true;

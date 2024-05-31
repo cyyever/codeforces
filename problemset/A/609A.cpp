@@ -11,7 +11,7 @@
 #include <iostream>
 #include <vector>
 
-int main(void) {
+int main() {
   size_t n;
   int64_t m;
 

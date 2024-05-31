@@ -9,9 +9,9 @@
 #include <cinttypes>
 #include <iostream>
 
-int main(void) {
+int main() {
   bool cnts[26]{};
-  char c;
+  char c = 0;
   while (std::cin >> c) {
     cnts[c - 'a'] = true;
   }

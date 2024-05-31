@@ -5,32 +5,32 @@
  * \author cyy
  */
 
+#include <algorithm>
 #include <cstring>
 #include <iostream>
-#include <algorithm>
 #include <vector>
 
-int main(void) {
+int main() {
   size_t n;
   std::cin >> n;
 
   std::vector<uint64_t> end_pages;
-  for (size_t i=0;i<n;i++) {
-    uint64_t s,e;
-      std::cin>>s>>e;
-      end_pages.emplace_back(e);
+  for (size_t i = 0; i < n; i++) {
+    uint64_t s, e;
+    std::cin >> s >> e;
+    end_pages.emplace_back(e);
   }
   uint64_t mark;
-  std::cin>>mark;
+  std::cin >> mark;
 
-  for(auto end_page:end_pages) {
-    if(mark>end_page) {
+  for (auto end_page : end_pages) {
+    if (mark > end_page) {
       n--;
     } else {
       break;
     }
   }
 
-  std::cout <<  n<< std::endl;
+  std::cout << n << std::endl;
   return 0;
 }

@@ -8,7 +8,7 @@
 #include <iostream>
 #include <string>
 
-int main(void) {
+int main() {
   std::string path, new_path;
   std::cin >> path;
   for (const auto &c : path) {

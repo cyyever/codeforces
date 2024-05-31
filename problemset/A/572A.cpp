@@ -8,7 +8,7 @@
 #include <cinttypes>
 #include <iostream>
 
-int main(void) {
+int main() {
 
   size_t n_a, n_b, k, m;
 

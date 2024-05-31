@@ -10,17 +10,17 @@
 #include <iostream>
 #include <vector>
 
-int main(void) {
+int main() {
   uint64_t n;
   size_t k;
-  std::cin >>n>>k;
-  for(size_t i=0;i<k;i++) {
-    if(n%10==0) {
-      n/=10;
+  std::cin >> n >> k;
+  for (size_t i = 0; i < k; i++) {
+    if (n % 10 == 0) {
+      n /= 10;
     } else {
       n--;
     }
   }
-  std::cout<<n;
+  std::cout << n;
   return 0;
 }

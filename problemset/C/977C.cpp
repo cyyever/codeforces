@@ -7,12 +7,10 @@
  */
 
 #include <algorithm>
+#include <cassert>
 #include <cinttypes>
 #include <iostream>
 #include <set>
-
-#include <cassert>
-#include <iostream>
 #include <unordered_map>
 #include <vector>
 
@@ -25,7 +23,7 @@ public:
     assert(!empty());
     return items[0];
   }
-  size_t size() const { return items.size(); }
+  [[nodiscard]] size_t size() const { return items.size(); }
   void pop() {
     if (items.empty()) {
       return;
@@ -50,7 +48,7 @@ public:
     }
     heapify_down(idx);
   }
-  bool empty() const { return items.empty(); }
+  [[nodiscard]] bool empty() const { return items.empty(); }
 
   void insert(data_type data) {
     items.emplace_back(std::move(data));
@@ -87,11 +85,11 @@ private:
     }
   }
 
-private:
-  std::vector<data_type> items;
+
+  std::vector<data_type> items{};
 };
 
-int main(int argc, char **argv) {
+int main(int  /*argc*/, char ** /*argv*/) {
   uint64_t n, k;
   std::cin >> n >> k;
   size_t heap_size = k + 1;

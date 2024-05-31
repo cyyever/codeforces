@@ -9,7 +9,7 @@
 #include <iostream>
 #include <utility>
 
-int main(void) {
+int main() {
   size_t t;
   std::cin >> t;
 

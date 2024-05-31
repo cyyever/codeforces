@@ -8,7 +8,7 @@
 #include <cinttypes>
 #include <iostream>
 
-int main(void) {
+int main() {
   uint64_t n;
   uint64_t m;
   uint64_t a;

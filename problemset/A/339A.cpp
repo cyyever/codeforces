@@ -10,9 +10,9 @@
 #include <iostream>
 #include <vector>
 
-int main(void) {
+int main() {
   std::vector<uint64_t> elems;
-  char plus;
+  char plus = 0;
   while (std::cin) {
     uint64_t elem = 0;
 

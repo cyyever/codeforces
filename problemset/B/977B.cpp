@@ -9,11 +9,12 @@
 #include <cinttypes>
 #include <iostream>
 
-int main(void) {
+int main() {
   std::array<size_t, 26 * 26> cnts{};
   size_t n;
   std::cin >> n;
-  char last_c, c;
+  char last_c;
+  char c;
   std::cin >> last_c;
 
   size_t max_cnt = 0;

@@ -6,13 +6,13 @@
  * \date 2017-06-11
  */
 
+#include <algorithm>
 #include <cassert>
 #include <cinttypes>
-#include <algorithm>
 #include <iostream>
 #include <string>
 
-int main(void) {
+int main() {
   size_t n;
   int64_t a = 0;
   int64_t max_odd_sum = (int64_t)(INT32_MIN) + 1;

@@ -10,7 +10,7 @@
 #include <iostream>
 #include <string>
 
-int main(void) {
+int main() {
   std::string n;
 
   std::cin >> n;

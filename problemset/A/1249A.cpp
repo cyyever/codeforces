@@ -8,7 +8,7 @@
 #include <cinttypes>
 #include <iostream>
 
-int main(void) {
+int main() {
   size_t q;
   std::cin >> q;
   for (size_t i = 0; i < q; i++) {
@@ -17,7 +17,7 @@ int main(void) {
     bool flags[102]{};
     size_t cnt = 1;
     for (size_t j = 0; j < n; j++) {
-      int a;
+      int a = 0;
       std::cin >> a;
       flags[a] = true;
       if (cnt == 1 && (flags[a - 1] || flags[a + 1])) {

@@ -9,7 +9,7 @@
 #include <iostream>
 #include <string>
 
-int main(void) {
+int main() {
   std::string s;
   std::string t;
   std::cin >> s;

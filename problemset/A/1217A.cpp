@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-int main(void) {
+int main() {
   size_t T;
   std::cin >> T;
 
