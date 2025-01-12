@@ -18,11 +18,13 @@
 class trace final {
 public:
   inline static size_t n = 0;
-  explicit trace(const char move, uint64_t a) {
+  explicit trace(const char move, uint64_t a, uint64_t x, uint64_t y) {
     if (moves.empty()) {
       moves.reserve(n);
     }
     moves.push_back(move);
+    this->x = x;
+    this->y = y;
 
     if (a == 0) {
       two_cnt = 1;
@@ -69,6 +71,8 @@ private:
   std::optional<uint64_t> two_cnt;
   std::optional<uint64_t> five_cnt;
   std::string moves;
+  uint64_t x;
+  uint64_t y;
 };
 
 int main() {
